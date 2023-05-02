@@ -23,11 +23,11 @@
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="402dp"
-        android:layout_height="69dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/signin"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="44dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:background="#30ffffff"
         android:drawablePadding="20dp"
         android:hint="Login"
@@ -35,12 +35,13 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="405dp"
-        android:layout_height="62dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/username"
         android:layout_margin="10dp"
         android:layout_marginBottom="12dp"
@@ -74,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loginbtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="150dp"
         android:text="Zarejestruj się"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
