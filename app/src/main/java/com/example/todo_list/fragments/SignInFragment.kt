@@ -1,11 +1,13 @@
 package com.example.todo_list.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.todo_list.R
@@ -52,8 +54,8 @@ class SignInFragment : Fragment() {
 
             if(login.isNotEmpty() && pass.isNotEmpty()){
                 val result = runBlocking { login(login, pass) }
-                if (result)
-                    navControl.navigate(R.id.action_signInFragment_to_homeFragment)
+                if (result != 0)
+                    navControl.navigate(R.id.action_signInFragment_to_homeFragment, bundleOf("userId" to result))
             }
             else{
                 Toast.makeText(activity, "Sprawdź poprawność danych logowania", Toast.LENGTH_SHORT).show()
@@ -65,18 +67,19 @@ class SignInFragment : Fragment() {
         }
     }
 
-    suspend fun login(username: String, password: String) : Boolean {
+    suspend fun login(username: String, password: String) : Int {
         val client = HttpClient(CIO)
         val response: HttpResponse = client.post(Env.API_HOST + "/Login?username=" + username + "&password=" + password)
         val json = JSONObject(String(response.body<ByteArray>()))
 
         if (json["type"] == "SUCCESS"){
+            val user = JSONObject(json["message"].toString())
             Toast.makeText(activity, "Zalogowano pomyślnie!", Toast.LENGTH_SHORT).show()
-            return true
+            return user["id"].toString().toInt()
         }
         else {
             Toast.makeText(activity, json["message"].toString(), Toast.LENGTH_SHORT).show()
-            return false
+            return 0
         }
     }
 }
