@@ -51,13 +51,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-118" />
-                            <option name="y" value="296" />
+                            <option name="x" value="-132" />
+                            <option name="y" value="317" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_singUpFragment_to_homeFragment">
+                            <entry key="action_singUpFragment_to_signInFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
