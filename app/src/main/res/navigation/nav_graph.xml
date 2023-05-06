@@ -31,10 +31,18 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <argument
+            android:name="listId"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+        <argument
             android:name="userId"
             app:argType="integer"
             android:defaultValue="0"
             />
+        <action
+            android:id="@+id/action_homeFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -49,5 +57,8 @@
         <action
             android:id="@+id/action_mainFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

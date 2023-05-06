@@ -151,8 +151,7 @@ class MainFragment : Fragment() {
     }
 
     private fun openList(listId: Int) {
-        // Tutaj przekierowujemy do widoku tasków
-        Toast.makeText(activity, "Clicked list with id " + listId, Toast.LENGTH_SHORT).show()
+        navControl.navigate(R.id.action_mainFragment_to_homeFragment, bundleOf("listId" to listId, "userId" to userId))
     }
 
     private fun dialogAddList() {
