@@ -44,7 +44,6 @@ class SignInFragment : Fragment() {
 
     private fun init(view: View){
         navControl = Navigation.findNavController(view)
-
     }
 
     private fun registerEvents() {
@@ -55,7 +54,7 @@ class SignInFragment : Fragment() {
             if(login.isNotEmpty() && pass.isNotEmpty()){
                 val result = runBlocking { login(login, pass) }
                 if (result != 0)
-                    navControl.navigate(R.id.action_signInFragment_to_homeFragment, bundleOf("userId" to result))
+                    navControl.navigate(R.id.action_signInFragment_to_mainFragment, bundleOf("userId" to result))
             }
             else{
                 Toast.makeText(activity, "Sprawdź poprawność danych logowania", Toast.LENGTH_SHORT).show()
