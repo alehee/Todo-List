@@ -10,11 +10,11 @@
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
-            android:id="@+id/action_signInFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
             android:id="@+id/action_signInFragment_to_singUpFragment"
             app:destination="@id/singUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/singUpFragment"
@@ -35,5 +35,19 @@
             app:argType="integer"
             android:defaultValue="0"
             />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.todo_list.fragments.MainFragment"
+        android:label="fragment_main_view"
+        tools:layout="@layout/fragment_main_view">
+        <argument
+            android:name="userId"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+        <action
+            android:id="@+id/action_mainFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>
