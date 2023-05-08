@@ -8,6 +8,15 @@
     tools:context=".fragments.HomeFragment">
 
     <ImageView
+        android:id="@+id/backBtnHome"
+        android:layout_width="48dp"
+        android:layout_height="49dp"
+        android:layout_margin="24dp"
+        android:src="@drawable/baseline_arrow_back_ios_new_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/addBtnHome"
         android:layout_width="64dp"
         android:layout_height="64dp"

@@ -73,7 +73,9 @@ class HomeFragment : Fragment(), AddTodoPopupFragment.DialogNextBtnClickListener
                 childFragmentManager,
                 "AddTodoPopupFragment"
             )
-
+        }
+        binding.backBtnHome.setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_mainFragment)
         }
     }
     private fun init(view: View){
