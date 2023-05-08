@@ -1,11 +1,14 @@
 package com.example.todo_list.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -75,7 +78,8 @@ class HomeFragment : Fragment(), AddTodoPopupFragment.DialogNextBtnClickListener
             )
         }
         binding.backBtnHome.setOnClickListener {
-            navController.navigate(R.id.action_homeFragment_to_mainFragment)
+            //navController.navigate(R.id.action_homeFragment_to_mainFragment)
+            goBackToMain()
         }
     }
     private fun init(view: View){
@@ -108,13 +112,26 @@ class HomeFragment : Fragment(), AddTodoPopupFragment.DialogNextBtnClickListener
     }
 
     override fun onEditTaskBtnClicked(toDoData: ToDoData) {
-        runBlocking { apiEditTask(toDoData) }
-        activity?.recreate()
+        val alertDialog: AlertDialog = AlertDialog.Builder(activity).create()
+        alertDialog.setTitle("Edytuja taska")
+        val editText = EditText(activity)
+        editText.setText(toDoData.task)
+        alertDialog.setView(editText)
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "EDYTUJ", DialogInterface.OnClickListener { dialog, id ->
+            var name = editText.text.toString()
+            var result = runBlocking { apiEditTask(ToDoData(toDoData.taskId, name)) }
+            dialog.dismiss()
+            activity?.recreate()
+        })
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "ANULUJ", DialogInterface.OnClickListener { dialog, id ->
+            dialog.dismiss()
+        })
+        alertDialog.show()
     }
 
     // Change view back to main
     private fun goBackToMain() {
-        navController.navigate(R.id.action_mainFragment_to_homeFragment, bundleOf("userId" to userId))
+        navController.navigate(R.id.action_homeFragment_to_mainFragment, bundleOf("userId" to userId))
     }
 
     /* API Calls */
