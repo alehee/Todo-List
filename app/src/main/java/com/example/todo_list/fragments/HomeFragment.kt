@@ -3,6 +3,7 @@ package com.example.todo_list.fragments
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Nickname
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -78,16 +79,15 @@ class HomeFragment : Fragment(), AddTodoPopupFragment.DialogNextBtnClickListener
             )
         }
         binding.backBtnHome.setOnClickListener {
-            //navController.navigate(R.id.action_homeFragment_to_mainFragment)
             goBackToMain()
         }
 
         binding.addFriend.setOnClickListener {
-            //ale jaja
+            addUserToListPopup()
         }
 
         binding.refresh.setOnClickListener {
-            //jak berety
+            activity?.recreate()
         }
     }
     private fun init(view: View){
@@ -128,6 +128,23 @@ class HomeFragment : Fragment(), AddTodoPopupFragment.DialogNextBtnClickListener
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "EDYTUJ", DialogInterface.OnClickListener { dialog, id ->
             var name = editText.text.toString()
             var result = runBlocking { apiEditTask(ToDoData(toDoData.taskId, name)) }
+            dialog.dismiss()
+            activity?.recreate()
+        })
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "ANULUJ", DialogInterface.OnClickListener { dialog, id ->
+            dialog.dismiss()
+        })
+        alertDialog.show()
+    }
+
+    private fun addUserToListPopup() {
+        val alertDialog: AlertDialog = AlertDialog.Builder(activity).create()
+        alertDialog.setTitle("Wpisz login użytkownika")
+        val editText = EditText(activity)
+        alertDialog.setView(editText)
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "DODAJ", DialogInterface.OnClickListener { dialog, id ->
+            var name = editText.text.toString()
+            runBlocking { apiAddUser(name) }
             dialog.dismiss()
             activity?.recreate()
         })
@@ -200,6 +217,19 @@ class HomeFragment : Fragment(), AddTodoPopupFragment.DialogNextBtnClickListener
 
         if (json["type"] == "SUCCESS"){
             Toast.makeText(activity, "Pomyślnie edytowano task", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(activity, json["message"].toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    suspend fun apiAddUser(userNickname: String) {
+        val client = HttpClient(CIO)
+        val response: HttpResponse = client.post(Env.API_HOST + "/ListAddUser?listId=" + listId + "&username=" + userNickname.replace(" ", "%20"))
+        val json = JSONObject(String(response.body<ByteArray>()))
+
+        if (json["type"] == "SUCCESS"){
+            Toast.makeText(activity, "Pomyślnie dodano użytkownika", Toast.LENGTH_SHORT).show()
         }
         else {
             Toast.makeText(activity, json["message"].toString(), Toast.LENGTH_SHORT).show()
