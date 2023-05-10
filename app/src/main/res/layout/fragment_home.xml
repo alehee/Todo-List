@@ -8,10 +8,32 @@
     tools:context=".fragments.HomeFragment">
 
     <ImageView
+        android:id="@+id/refresh"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/baseline_refresh_24"
+        app:layout_constraintEnd_toStartOf="@+id/addFriend"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/addFriend"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="68dp"
+        android:src="@drawable/baseline_person_add_alt_1_24"
+        app:layout_constraintEnd_toStartOf="@+id/addBtnHome"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/backBtnHome"
         android:layout_width="48dp"
         android:layout_height="49dp"
-        android:layout_margin="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:src="@drawable/baseline_arrow_back_ios_new_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

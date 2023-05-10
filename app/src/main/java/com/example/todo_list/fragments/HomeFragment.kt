@@ -81,6 +81,14 @@ class HomeFragment : Fragment(), AddTodoPopupFragment.DialogNextBtnClickListener
             //navController.navigate(R.id.action_homeFragment_to_mainFragment)
             goBackToMain()
         }
+
+        binding.addFriend.setOnClickListener {
+            //ale jaja
+        }
+
+        binding.refresh.setOnClickListener {
+            //jak berety
+        }
     }
     private fun init(view: View){
         navController = Navigation.findNavController(view)
