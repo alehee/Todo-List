@@ -173,7 +173,7 @@ class MainFragment : Fragment() {
 
     private fun dialogDeleteList(listId: Int, name: String) {
         val alertDialog: AlertDialog = AlertDialog.Builder(activity).create()
-        alertDialog.setTitle("Dodaj listę")
+        alertDialog.setTitle("Usuń listę")
         alertDialog.setMessage("Czy na pewno chcesz usunąć listę '" + name + "'?")
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "USUŃ", DialogInterface.OnClickListener { dialog, id ->
             runBlocking { deleteList(listId) }
